@@ -1,0 +1,237 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+	<changeSet id="1" author="meri">
+		<createTable tableName="collectionowner">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="inverse_id" type="integer" />
+		</createTable>
+		<createTable tableName="collectioninverse">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint constraintName="fk_collectionownerinverse"
+			baseTableName="collectionowner" baseColumnNames="inverse_id"
+			referencedTableName="collectioninverse" referencedColumnNames="id" />
+	</changeSet>
+
+	<changeSet id="2" author="meri">
+		<insert tableName="collectioninverse">
+			<column name="id" valueNumeric="5" />
+		</insert>
+		<insert tableName="collectionowner">
+			<column name="id" valueNumeric="1" />
+			<column name="inverse_id" valueNumeric="5" />
+		</insert>
+		<insert tableName="collectioninverse">
+			<column name="id" valueNumeric="3" />
+		</insert>
+		<insert tableName="collectionowner">
+			<column name="id" valueNumeric="3" />
+			<column name="inverse_id" valueNumeric="3" />
+		</insert>
+		<insert tableName="collectioninverse">
+			<column name="id" valueNumeric="4" />
+		</insert>
+		<insert tableName="collectionowner">
+			<column name="id" valueNumeric="4" />
+			<column name="inverse_id" valueNumeric="4" />
+		</insert>
+		<insert tableName="collectioninverse">
+			<column name="id" valueNumeric="6" />
+		</insert>
+		<insert tableName="collectionowner">
+			<column name="id" valueNumeric="6" />
+		</insert>
+		<insert tableName="collectioninverse">
+			<column name="id" valueNumeric="7" />
+		</insert>
+		<insert tableName="collectionowner">
+			<column name="id" valueNumeric="7" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="3" author="meri">
+		<createTable tableName="mapowner">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="inverse_id" type="integer" />
+			<column name="mapkey" type="varchar(1500)" >
+				<constraints unique="true" nullable="false" />
+			</column>
+		</createTable>
+		<createTable tableName="mapinverse">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint constraintName="fk_mapownerinverse"
+			baseTableName="mapowner" baseColumnNames="inverse_id"
+			referencedTableName="mapinverse" referencedColumnNames="id" />
+	</changeSet>
+
+	<changeSet id="4" author="meri">
+		<insert tableName="mapinverse">
+			<column name="id" valueNumeric="5" />
+		</insert>
+		<insert tableName="mapowner">
+			<column name="id" valueNumeric="1" />
+			<column name="mapkey" value="first" />
+			<column name="inverse_id" valueNumeric="5" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="5" author="meri">
+		<createTable tableName="customcolumncollectionowner">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="customcolumn" type="integer" />
+		</createTable>
+		<createTable tableName="customcolumncollectioninverse">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint constraintName="fk_customcolumncollectionownerinverse"
+			baseTableName="customcolumncollectionowner" baseColumnNames="customcolumn"
+			referencedTableName="customcolumncollectioninverse"
+			referencedColumnNames="id" />
+	</changeSet>
+
+	<changeSet id="6" author="meri">
+		<insert tableName="customcolumncollectioninverse">
+			<column name="id" valueNumeric="5" />
+		</insert>
+		<insert tableName="customcolumncollectionowner">
+			<column name="id" valueNumeric="1" />
+			<column name="customcolumn" valueNumeric="5" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="7" author="meri">
+		<createTable tableName="customcolumnmapowner">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="custommapkey" type="varchar(1500)">
+				<constraints unique="true" nullable="false" />
+			</column>
+			<column name="customcolumn" type="integer" />
+		</createTable>
+		<createTable tableName="customcolumnmapinverse">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint constraintName="fk_customcolumnmapownerinverse"
+			baseTableName="customcolumnmapowner" baseColumnNames="customcolumn"
+			referencedTableName="customcolumnmapinverse" referencedColumnNames="id" />
+	</changeSet>
+
+	<changeSet id="8" author="meri">
+		<insert tableName="customcolumnmapinverse">
+			<column name="id" valueNumeric="5" />
+		</insert>
+		<insert tableName="customcolumnmapowner">
+			<column name="id" valueNumeric="1" />
+			<column name="custommapkey" value="first" />
+			<column name="customcolumn" valueNumeric="5" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="9" author="meri">
+		<createTable tableName="orderedowner">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="inverse_id" type="integer" />
+			<column name="orderby" type="integer" />
+		</createTable>
+		<createTable tableName="orderedinverse">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint constraintName="fk_orderedownerinverse"
+			baseTableName="orderedowner" baseColumnNames="inverse_id"
+			referencedTableName="orderedinverse" referencedColumnNames="id" />
+	</changeSet>
+
+	<changeSet id="10" author="meri">
+		<insert tableName="orderedinverse">
+			<column name="id" valueNumeric="1" />
+		</insert>
+		<insert tableName="orderedowner">
+			<column name="id" valueNumeric="1" />
+			<column name="orderby" valueNumeric="11" />
+			<column name="inverse_id" valueNumeric="1" />
+		</insert>
+
+		<insert tableName="orderedowner">
+			<column name="id" valueNumeric="2" />
+			<column name="orderby" valueNumeric="55" />
+			<column name="inverse_id" valueNumeric="1" />
+		</insert>
+
+		<insert tableName="orderedowner">
+			<column name="id" valueNumeric="3" />
+			<column name="orderby" valueNumeric="44" />
+			<column name="inverse_id" valueNumeric="1" />
+		</insert>
+
+		<insert tableName="orderedowner">
+			<column name="id" valueNumeric="4" />
+			<column name="orderby" valueNumeric="33" />
+			<column name="inverse_id" valueNumeric="1" />
+		</insert>
+
+		<insert tableName="orderedowner">
+			<column name="id" valueNumeric="5" />
+			<column name="orderby" valueNumeric="22" />
+			<column name="inverse_id" valueNumeric="1" />
+		</insert>
+
+		<insert tableName="orderedowner">
+			<column name="id" valueNumeric="6" />
+			<column name="orderby" valueNumeric="11" />
+			<column name="inverse_id" valueNumeric="1" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="21" author="meri">
+		<createTable tableName="orphanowner">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="inverse_id" type="integer" />
+			<column name="mapkey" type="varchar(1500)" />
+		</createTable>
+		<createTable tableName="orphaninverse">
+			<column name="id" type="integer">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint constraintName="fk_orphanownerinverse"
+			baseTableName="orphanowner" baseColumnNames="inverse_id"
+			referencedTableName="orphaninverse" referencedColumnNames="id" />
+	</changeSet>
+
+	<changeSet id="22" author="meri">
+		<insert tableName="orphaninverse">
+			<column name="id" valueNumeric="5" />
+		</insert>
+		<insert tableName="orphanowner">
+			<column name="id" valueNumeric="1" />
+			<column name="mapkey" value="first" />
+			<column name="inverse_id" valueNumeric="5" />
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>
