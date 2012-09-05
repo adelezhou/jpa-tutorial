@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -28,6 +29,7 @@ public class PersonServiceImpl implements PersonService {
 	@EndpointInject
 	ProducerTemplate producer;
 	
+	@PersistenceUnit
 	private static EntityManagerFactory factory;
 
 
@@ -43,16 +45,20 @@ public class PersonServiceImpl implements PersonService {
 //		Product p = productDao.getProduct(id);
 		
 // static
-		Person p = new Person();
-		p.setId(Long.valueOf(id));
-		p.setFirstName("homer");
-		p.setLastName("simpson");
-		Object xml = producer.requestBody("direct:marshaller", p);
-		
-//	    EntityManager em = factory.createEntityManager();
-//	    Person person1 = em.find(Person.class, BigDecimal.valueOf(1));
-//	    em.close();
-//		Object xml = producer.requestBody("direct:marshaller", person1);
+//		Person p = new Person();
+//		p.setId(Long.valueOf(id));
+//		p.setFirstName("homer");
+//		p.setLastName("simpson");
+//		Object xml = producer.requestBody("direct:marshaller", p);
+
+	    System.out.println("adele - before create em ");
+	    EntityManager em = factory.createEntityManager();
+	    System.out.println("adele - after create em ");
+	    Person person1 = em.find(Person.class, BigDecimal.valueOf(1));
+	    System.out.println("adele - after em.find ");
+	    System.out.println("adele - test: " + person1.getFirstName());
+	    em.close();
+		Object xml = producer.requestBody("direct:marshaller", person1);
 
 		return Response.ok(xml, MediaType.APPLICATION_XML_TYPE).build();
 	}

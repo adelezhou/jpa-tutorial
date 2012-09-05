@@ -16,6 +16,8 @@ jpa-tutorial $ mvn clean install
 [install bundler] karaf@root> install -s file:/Users/a.zhou/.m2/repository/org/meri/org.meri.jpa.tutorial/0.0.1-SNAPSHOT/org.meri.jpa.tutorial-0.0.1-SNAPSHOT.jar
 OR [update bundler] karaf@root> update 251 file:/Users/a.zhou/.m2/repository/org/meri/org.meri.jpa.tutorial/0.0.1-SNAPSHOT/org.meri.jpa.tutorial-0.0.1-SNAPSHOT.jar
 url: http://localhost:1234/myapp/person/1
+[stop serviceMix from console] karaf@root> shutdown
+[emptying the component cache] apache-servicemix-4.3.0 $ rm -rf data/cache/*
 
 REFERENCE
 =========
